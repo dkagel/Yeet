@@ -27,34 +27,36 @@ def startingRoom():
 		print('there are two doors in this room. One to the north that leads to the bathroom, and one to the east that leads to the hallway.')
     else:
 		print('There are two doors in this room.  One to the north, and one to the east.')
-	userAction = raw_input('What would you like to do? ')
+    userAction = raw_input('What would you like to do? ')
     while exitRoom == False:
         if userAction == 'go north':
-            print('The door slowly creaks open')
+            print('The door slowly creaks open to reveal a bathroom.')
             openedDoors += ['bathroom']
             exitRoom = True
-        elif userAction == 'open door 2' and 'flashlight' in playerItems:
-            print('You open the door and can now see inside with the flashlight.')
-            openedDoors += ['door2']
+        elif userAction == 'go east':
+            print('You open the door to reveal a dimly lit hallway')
+            openedDoors += ['hallway']
             exitRoom = True
-        elif userAction == 'open dresser':
-            print('You picked up', dresserItems)
-            playerItems += dresserItems
-            dresserItems = []
-            userAction = raw_input('What would you like to do now? ')
-        elif userAction == 'open door 1' and 'key1' not in playerItems:
-            print('The door will not open')
-            userAction = raw_input('What would you like to do now? ')
-        elif userAction == 'open door 2' and 'flashlight' not in playerItems:
-            print('You open the door, but it is so dark inside that you cannot see.  You do not enter and you close the door.')
-            userAction = raw_input('What would you like to do now? ')
         else:
             userAction = raw_input('Not a valid action.  Try Again! ')
-    if 'door1' in openedDoors:
-        room2()
-    else:
-        room3()
-        
+    if userAction == 'go north':
+        bathroom()
+    elif userAction == 'go east':
+        hallway()
+    elif userAction == 'go west':
+    	window()
+
+def window():
+    print('You open the window')
+    print('You can climb west out of the window or go back east into the room')
+    if userAction == 'go west':
+    	if 'rope' in playerItems or 'bedsheets' in playerItems:
+    		print('You climb down from the window successfully')
+		win()
+	else:
+		print('You fall from the window to your death')
+		startGame()
+
 def bathroom():
     global enteredRooms
     tableItems = ["glass of water", razor]
