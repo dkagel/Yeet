@@ -4,26 +4,34 @@ import random
 playerItems = []
 enteredRooms = []
 openedDoors = []
+playerHealth = []
 
 def startGame():
     print('Welcome to the mysterious mansion')
     raw_input('Press enter to start the game. ')
+    print('You awake in pain, on a cold hardwood floor. You look around the room you've found yourself in.')
+    print('There is a window to the west that leads to the outside. Looking at the window, you see you are on the second story of a house, in the middle of the wilderness.')
     room1()
 
-def room1():
+def startingRoom():
     global playerItems
     global enteredRooms
     global openedDoors
     exitRoom = False
-    dresserItems = ['key1', 'flashlight']
-    print('You have entered the foyer')
-    print('There are two doors in this room.  One to the left(door 1) and one to the right(door2).')
-    print('There is also a dresser with one drawer in the room.')
-    userAction = raw_input('What would you like to do? ')
+    dresserItems = []
+    if 'bathroom' in openedDoors:
+        print('There are two doors in this room.  One to the north that leads to the bathroom, and one to the east.')
+    elif 'hallway' in openedDoors:
+        print('there are two doors in this room. One to the north, and one to the east that leads to the hallway.')
+    elif 'bathroom' in openedDoors and 'hallway' in openedDoors:
+		print('there are two doors in this room. One to the north that leads to the bathroom, and one to the east that leads to the hallway.')
+    else:
+		print('There are two doors in this room.  One to the north, and one to the east.')
+	userAction = raw_input('What would you like to do? ')
     while exitRoom == False:
-        if userAction == 'open door 1' and 'key1' in playerItems:
+        if userAction == 'go north':
             print('The door slowly creaks open')
-            openedDoors += ['door1']
+            openedDoors += ['bathroom']
             exitRoom = True
         elif userAction == 'open door 2' and 'flashlight' in playerItems:
             print('You open the door and can now see inside with the flashlight.')
@@ -43,34 +51,17 @@ def room1():
         else:
             userAction = raw_input('Not a valid action.  Try Again! ')
     if 'door1' in openedDoors:
-        bathroom()
+        room2()
     else:
         room3()
         
-def bathroom():
+def room2():
     global enteredRooms
-    tableItems = ["glass of water", razor]
-    print('You entered the bathroom, there is only an exit to the south to the starting room.')
-    if 'bathroom' in enteredRooms:
+    print('You entered Room 2')
+    if 'room2' in enteredRooms:
         print('This room looks vaguely familiar')
-    if 'bathroom' not in enteredRooms:
-        enteredRooms += ['bathoom']
-    print('There is one door in this room, an exit to the hallway.')
-    print('There are also items on the counter.')
-    userAction = raw_input('What would you like to do? ')
-    while exitRoom == False:
-        if userAction == 'go south:
-            print('You exit into the starting room')
-            exitRoom = True
-        elif userAction == 'pick up water':
-            print('You picked up a glass of water.")
-            playerItems += tableItems[0]
-        elif userAction == 'pick up razor':
-            print('You picked up the razor.")
-            playerItems += tableItems[1]    
-            userAction = raw_input('What would you like to do now? ')
-        else:
-            userAction = raw_input('Not a valid action.  Try Again! ')
+    if 'room2' not in enteredRooms:
+        enteredRooms += ['room2']
         
 def room3():
     global enteredRooms
