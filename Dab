@@ -302,3 +302,4 @@ def reset():
 	openedDoors = []
 	enteredRooms = []
 	startGame()
+startGame()
