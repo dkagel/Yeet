@@ -4,14 +4,13 @@ import random
 playerItems = []
 enteredRooms = []
 openedDoors = []
-playerHealth = 100
+playerHealth = []
 
 def startGame():
-    print('Welcome to the murder mansion')
+    print('Welcome')
     raw_input('Press enter to start the game. ')
     print('You awake in pain, on a cold hardwood floor. You look around the room you've found yourself in.')
     print('There is a window to the west that leads to the outside. Looking at the window, you see you are on the second story of a house, in the middle of the wilderness.')
-    playerHealth = 30
     startingRoom()
 
 def startingRoom():
@@ -48,45 +47,247 @@ def startingRoom():
     	window()
 
 def window():
-    print('You open the window')
-    print('You can climb west out of the window or go back east into the room')
-    if userAction == 'go west':
-    	if 'rope' in playerItems or 'bedsheets' in playerItems:
-    		print('You climb down from the window successfully')
-		win()
+	global playerItems
+	exitRoom = False
+	print('You open the window')
+	print('You can climb west out of the window or go back east into the room')
+	userAction = raw_input('What would you like to do? ')
+	while exitRoom == False
+		if userAction == 'go west':
+    			if 'rope' in playerItems:
+    				print('You climb down from the window with the rope.')
+				exitRoom = True
+			else:
+				print('You fall from the window to your death')
+		elif userAction == "go east":
+    			print('You go into the starting room')
+			exitRoom = True
+	if userAction == 'go west':
+		if "rope" in playerItems:
+			fight()
+		else:
+			die()
 	else:
-		print('You fall from the window to your death')
-		startGame()
+		startingRoom()
 
 def bathroom():
     global enteredRooms
-    tableItems = ["glass of water", razor]
+    exitRoom == False
+    tableItems = ['glass of water', 'razor']
     print('You entered the bathroom, there is only an exit to the south to the starting room.')
     if 'bathroom' in enteredRooms:
-        print('This room looks vaguely familiar')
+        print('You are back in the bathroom')
     if 'bathroom' not in enteredRooms:
         enteredRooms += ['bathoom']
-    print('There is one door in this room, an exit to the hallway.')
-    print('There are also items on the counter.')
+    if 'water' in playerItems or 'razor' in playerItems:
+    	print('There is nothing on the counter')
+    else:
+    	print('There is a glass of water and a razor on the counter.')
     userAction = raw_input('What would you like to do? ')
     while exitRoom == False:
-        if userAction == 'go south:
+        if userAction == 'go south':
             print('You exit into the starting room')
             exitRoom = True
-        elif userAction == 'pick up water':
-            print('You picked up a glass of water.")
-            playerItems += tableItems[0]
+        elif userAction == 'pick up glass of water':
+            print('You drink the glass of water and feel more refreshed and awake.')
+	    playerItems += 'water'
+	    userAction = raw_input('What would you like to do now? ')
         elif userAction == 'pick up razor':
             print('You picked up the razor.")
-            playerItems += tableItems[1]    
+            playerItems += "razor"    
             userAction = raw_input('What would you like to do now? ')
         else:
             userAction = raw_input('Not a valid action.  Try Again! ')
+    if userAction == 'go south':
+    	startingRoom()
         
 def hallway():
-    global enteredRooms
-    print('You entered the hallway")
-    if 'hallway' in enteredRooms:
-        print('This room looks vaguely familiar')
-    if 'hallway' not in enteredRooms:
-            enteredRooms += ['hallway']
+	exitRoom == False
+	print('You enter the hallway. Behind you to the west is the starting room. To your south you find the stairs that lead down to a foyer.')
+	userAction = raw_input('What would you like to do? ')
+	while exitRoom == False:
+    		if userAction == "go south":
+    			print("You head down the stairs and into the foyer")
+			exitRoom = True
+		elif userAction == "go west":
+			print("You return to the starting room")
+			exitRoom = True
+		else:
+			userAction = raw_input('Not a valid action. Try again! ')
+	if userAction == "go south":
+		foyer()
+	else:
+		startingRoom()
+
+def foyer():
+	exitRoom == False
+	print('You find yourself in the foyer of the home. To your north is the front door, to your west is the kitchen, and to your east is the living room.')
+	userAction = raw_input("What would you like to do? ")
+	while exitRoom == False:
+		if userAction == 'go north':
+			print('You head towards the front door'):
+			exitRoom = True
+		elif userAction == 'go west':
+			print('You head into the kitchen')
+			exitRoom = True
+		elif userAction == 'go east':
+			print('You head into the living room')
+			exitRoom = True
+		else:
+			userAction = raw_input('Not a valid action. Try again! ')
+	if userAction == "go west":
+		kitchen()
+	elif userAction == "go east":
+		livingRoom()
+	else:
+		frontDoor()
+		
+def kitchen():
+	exitRoom == False
+	global playerItems
+	tableItems = ["knife"]
+	if 'knife' in playerItems:
+		print('You are in the kitchen. Further to the west is a pantry, and back to the east is the foyer.')
+	else:
+		print('You are in the kitchen. Further to the west is a pantry, and back to the east is the foyer. On the counter lays a kitchen knife.')
+	userAction = raw_input("What would you like to do? ")
+	while exitRoom == False:
+		if userAction == 'go west':
+			print('You go to look inside of the pantry.')
+			exitRoom = True
+		elif userAction == 'go east':
+			print('You go back into the foyer.')
+			exitRoom = True
+		elif userAction == 'pick up knife':
+			print('You pick up the knife')
+			playerItems += 'knife'
+			userAction = raw_input('what would you like to do now? ')
+		else:
+			userAction = raw_input('Not a valid action. Try again! ')
+	if userAction == 'go west':
+		pantry()
+	else:
+		foyer()
+		
+def pantry():
+	global playerItems
+	tableItems = ["medicine", "hammer"]
+	exitRoom = False
+	if 'medicine' in playerItems or 'hammer' in playerItems:
+		print('Inside of the pantry there are many items. The kitchen is back to your east')
+	else:
+		print('Inside of the pantry there are many items. Some things that catch your eye are medicine and a hammer. The kitchen is back to your east')
+	userAction = raw_input("What would you like to do?" )
+	while exitRoom == False:
+		if userAction == 'pick up hammer':
+			print('You pick up the hammer')
+			playerItems += 'hammer'
+			userAction = raw_input('What would you like to do now? ')
+		elif userAction == 'pick up medicine':
+			print('You take the medicine')
+			playerItems += 'medicine'
+			userAction = raw_input('What would you like to do now? ')
+		elif userAction == 'go east':
+			print('You go back into the kitchen')
+			exitRoom = True
+		else:
+			userAction = raw_input('Not a valid action. Try again! ')
+	kitchen()
+		
+def livingRoom():
+	global playerItems
+	tableItems = ["Gun", "Rope"]
+	exitRoom = False
+	if 'gun' in playerItems or 'rope' in playerItems:
+		print("The living room is ornately furnished and looks unhabited. The foyer is behind you to your east.")
+	else:
+		print("The living room is ornately furnished and looks unhabited. Looking further around, there is a gun sitting on the coffee table, next to a rope. The foyer is behind you to your east.")
+	userAction = raw_input("What would you like to do?" )
+	while exitRoom == False:
+		if userAction == 'pick up gun':
+			print('You take the gun')
+			playerItems += 'gun'
+			userAction = raw_input('What would you like to do now? ') 
+		elif userAction == 'pick up rope':
+			print('You take the rope')
+			playerItems += 'rope'
+			userAction = raw_input('What would you like to do now? ')
+		elif userAction == 'go east':
+			print('You return to the foyer')
+			exitRoom == True
+		else:
+			userAction = raw_input('Not a valid action. Try again! ')
+	foyer()
+	
+def frontDoor():
+	global playerItems
+	exitRoom = False
+	print('You try to open the front door. It won't open')
+	if 'hammer' in playerItems:
+		userAction = raw_input('Do you want to use the hammer to try to bust open the door? (yes or no) ')
+		if userAction == "yes":
+			breakDoor()
+		else:
+			print('You return to the foyer')
+			foyer()
+	else:
+		print('You return to the foyer')
+		foyer()
+
+def breakDoor():
+	exitRoom = False
+	print('You break open the door with a loud crash of the hammer. As you are about to exit, you here a noise from the south. You are faced with a decision, run free to the north, or investigate the noise to the south.')
+	userAction = raw_input('What would you like to do? ')
+	while exitRoom == False:
+		if userAction == 'go south':
+			print('You turn around to investigate the noise')
+			exitRoom == True
+		elif userAction == 'go north':
+			print('You step outside of the house and start to walk away.')
+			print('As you are walking to your freedom, you hear crashing footsteps behind you.')
+			exitRoom == True
+		else:
+			userAction = raw_input('Not a valid action. Try again: ')
+	fight()
+		
+def fight():
+	global playerItems
+	print('You turn around to come face to face with your kidnapper. He rushes you with a shank.')
+	if 'gun' in playerItems:
+		print('You pull out your gun and kill him with ease.')
+		win()
+	elif 'water' in playerItems and 'medicine' in playerItems and 'knife' in playerItems:	
+		print('You pull out your knife and engage in a heated battle with the kidnapper. After a long and hardfought engagement, you fatally stab him and walk away victorious.')
+		win()
+	elif 'knife' in playerItems:	
+		print('You pull out your knife and engage in a heated battle with the kidnapper. But long into the fight you find yourself fatigued. You slip up, and the kidnapper fatally stabs you.')
+		die()
+	else:
+		print('You prepare yourself to fight, but you have no weapon to defend youself with. He quickly overpowers you and fatally stabs you.')
+		die()
+
+def win():
+	print('congradulations! You escaped and earned your freedom!')
+	print('End of game')
+	again = raw_input('Would you like to play again?(yes or no) ')
+	if again == 'yes':
+		reset()
+	
+def die():
+	print('Sorry. You died?')
+	again = raw_input('Would you like to play again?(yes or no) ')
+	if again == 'yes':
+		reset()
+	else:
+		print('thanks for playing!')
+		
+def reset():
+	global playerItems
+	global openedDoors
+	global enteredRooms
+	playerItems = []
+	openedDoors = []
+	enteredRooms = []
+	startGame()
+	
+	
