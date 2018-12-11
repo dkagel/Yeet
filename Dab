@@ -275,6 +275,12 @@ def win():
 	again = raw_input('Would you like to play again?(yes or no) ')
 	if again == 'yes':
 		reset()
+	elif again == "no":
+
+		print("Thanks for playing!")
+	else:
+		print('please enter yes or no")
+		
 	
 def die():
 	print('Sorry. You died? Mad?')
