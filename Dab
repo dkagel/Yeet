@@ -214,7 +214,7 @@ def livingRoom():
 			userAction = raw_input('What would you like to do now? ')
 		elif userAction == 'go east':
 			print('You return to the foyer')
-			exitRoom == True
+			exitRoom = True
 		else:
 			userAction = raw_input('Not a valid action. Try again! ')
 	foyer()
@@ -297,3 +297,4 @@ def reset():
 	openedDoors = []
 	enteredRooms = []
 	startGame()
+startGame()
