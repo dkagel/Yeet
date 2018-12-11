@@ -23,7 +23,7 @@ def startingRoom():
     elif 'hallway' in openedDoors:
         print('there are two doors in this room. One to the north, and one to the east that leads to the hallway.')
     elif 'bathroom' in openedDoors and 'hallway' in openedDoors:
-		print('there are two doors in this room. One to the north that leads to the bathroom, and one to the east that leads to the hallway.')
+		print('there are two doors in this room. One to the north that leads to the bathroom, and one to the east that leads to the hallway. There is a window on the west of the room')
     else:
 		print('There are two doors in this room.  One to the north, and one to the east.')
     userAction = raw_input('What would you like to do? ')
@@ -121,10 +121,10 @@ def hallway():
 
 def foyer():
 	exitRoom = False
-	print('You find yourself in the foyer of the home. To your north is the front door, to your west is the kitchen, and to your east is the living room.')
+	print('You find yourself in the foyer of the home. To your south is the front door, to your west is the kitchen, and to your east is the living room. The upstairs hallay is to your north.')
 	userAction = raw_input("What would you like to do? ")
 	while exitRoom == False:
-		if userAction == 'go north':
+		if userAction == 'go south':
 			print('You head towards the front door')
 			exitRoom = True
 		elif userAction == 'go west':
@@ -133,14 +133,19 @@ def foyer():
 		elif userAction == 'go east':
 			print('You head into the living room')
 			exitRoom = True
+		elif userAction == 'go north':
+		        print('You head back upstairs into the hallway')
+		        exitRoom = True
 		else:
 			userAction = raw_input('Not a valid action. Try again! ')
 	if userAction == "go west":
 		kitchen()
 	elif userAction == "go east":
 		livingRoom()
+	elif userAction == 'go south':
+	        frontDoor()
 	else:
-		frontDoor()
+		hallway()
 		
 def kitchen():
 	exitRoom = False
@@ -199,9 +204,9 @@ def livingRoom():
 	tableItems = ["Gun", "Rope"]
 	exitRoom = False
 	if 'gun' in playerItems or 'rope' in playerItems:
-		print("The living room is ornately furnished and looks unhabited. The foyer is behind you to your east.")
+		print("The living room is ornately furnished and looks unhabited. The foyer is behind you to your west.")
 	else:
-		print("The living room is ornately furnished and looks unhabited. Looking further around, there is a gun sitting on the coffee table, next to a rope. The foyer is behind you to your east.")
+		print("The living room is ornately furnished and looks unhabited. Looking further around, there is a gun sitting on the coffee table, next to a rope. The foyer is behind you to your west.")
 	userAction = raw_input("What would you like to do?" )
 	while exitRoom == False:
 		if userAction == 'pick up gun':
@@ -212,27 +217,27 @@ def livingRoom():
 			print('You take the rope')
 			playerItems += 'rope'
 			userAction = raw_input('What would you like to do now? ')
-		elif userAction == 'go east':
-			print('You return to the foyer')
+		elif userAction == 'go west':
+		        print('You return to the foyer')
 			exitRoom = True
 		else:
 			userAction = raw_input('Not a valid action. Try again! ')
 	foyer()
 	
 def frontDoor():
-	global playerItems
-	exitRoom = False
-	print('You try to open the front door. It will not open')
-	if 'hammer' in playerItems:
-		userAction = raw_input('Do you want to use the hammer to try to bust open the door? (yes or no) ')
-		if userAction == "yes":
-			breakDoor()
-		else:
-			print('You return to the foyer')
-			foyer()
-	else:
-		print('You return to the foyer')
-		foyer()
+    global playerItems
+    exitRoom = False
+    print('You try to open the front door. It will not open')
+    if 'hammer' in playerItems:
+        userAction = raw_input('Do you want to use the hammer to try to bust open the door? (yes or no) ')
+        if userAction == "yes":
+            breakDoor()
+        elif userAction != 'yes':
+            print('You return to the foyer')
+            foyer()
+    else:
+        print('You return to the foyer')
+        foyer()
 
 def breakDoor():
 	exitRoom = False
@@ -297,4 +302,3 @@ def reset():
 	openedDoors = []
 	enteredRooms = []
 	startGame()
-startGame()
