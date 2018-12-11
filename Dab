@@ -4,7 +4,6 @@ import random
 playerItems = []
 enteredRooms = []
 openedDoors = []
-playerHealth = 30
 
 def startGame():
     print('Welcome')
@@ -253,20 +252,17 @@ def breakDoor():
 def fight():
 	global playerItems
 	print('You turn around to come face to face with your kidnapper. He rushes you with a shank.')
-	if playerHealth >= 75:
-		if 'gun' in playerItems:
-			print('You pull out your gun and kill him with ease.')
-			win()
-		elif 'water' in playerItems and 'medicine' in playerItems and 'knife' in playerItems:	
-			print('You pull out your knife and engage in a heated battle with the kidnapper. After a long and hardfought engagement, you fatally stab him and walk away victorious.')
-			win()
-		elif 'knife' in playerItems:	
-			print('You pull out your knife and engage in a heated battle with the kidnapper. But long into the fight you find yourself fatigued. You slip up, and the kidnapper fatally stabs you.')
-			die()
-		else:
-			print('You prepare yourself to fight, but you have no weapon to defend youself with. He quickly overpowers you and fatally stabs you.')
-			die()
+	if 'gun' in playerItems:
+		print('You pull out your gun and kill him with ease.')
+		win()
+	elif 'water' in playerItems and 'medicine' in playerItems and 'knife' in playerItems:	
+		print('You pull out your knife and engage in a heated battle with the kidnapper. After a long and hardfought engagement, you fatally stab him and walk away victorious.')
+		win()
+	elif 'knife' in playerItems:	
+		print('You pull out your knife and engage in a heated battle with the kidnapper. But long into the fight you find yourself fatigued. You slip up, and the kidnapper fatally stabs you.')
+		die()
 	else:
+		print('You prepare yourself to fight, but you have no weapon to defend youself with. He quickly overpowers you and fatally stabs you.')
 		die()
 
 def win():
@@ -299,8 +295,4 @@ def reset():
 	playerItems = []
 	openedDoors = []
 	enteredRooms = []
-	playerHealth = 30
 	startGame()
-
-if playerAction ==	
-	
