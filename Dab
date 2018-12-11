@@ -4,14 +4,15 @@ import random
 playerItems = []
 enteredRooms = []
 openedDoors = []
-playerHealth = []
+playerHealth = 100
 
 def startGame():
-    print('Welcome to the mysterious mansion')
+    print('Welcome to the murder mansion')
     raw_input('Press enter to start the game. ')
     print('You awake in pain, on a cold hardwood floor. You look around the room you've found yourself in.')
     print('There is a window to the west that leads to the outside. Looking at the window, you see you are on the second story of a house, in the middle of the wilderness.')
-    room1()
+    playerHealth = 30
+    startingRoom()
 
 def startingRoom():
     global playerItems
@@ -82,10 +83,10 @@ def bathroom():
         else:
             userAction = raw_input('Not a valid action.  Try Again! ')
         
-def room3():
+def hallway():
     global enteredRooms
-    print('You entered Room 3')
-    if 'room3' in enteredRooms:
+    print('You entered the hallway")
+    if 'hallway' in enteredRooms:
         print('This room looks vaguely familiar')
-    if 'room3' not in enteredRooms:
-            enteredRooms += ['room3']
+    if 'hallway' not in enteredRooms:
+            enteredRooms += ['hallway']
