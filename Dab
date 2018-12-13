@@ -3,7 +3,7 @@ from __future__ import print_function
 playerItems = []
 enteredRooms = []
 openedDoors = []
-
+#start of the game, sets background
 def startGame():
     print('Welcome')
     raw_input('Press enter to start the game. ')
@@ -11,6 +11,7 @@ def startGame():
     print('There is a window to the west that leads to the outside. Looking at the window, you see you are on the second story of a house, in the middle of the wilderness.')
     startingRoom()
 
+#defines the starting room
 def startingRoom():
     global playerItems
     global enteredRooms
@@ -46,6 +47,7 @@ def startingRoom():
     elif userAction == 'go west':
     	window()
 
+#defines the "window room" along with a possible win condition
 def window():
 	global playerItems
 	exitRoom = False
@@ -71,6 +73,7 @@ def window():
 	else:
 		startingRoom()
 
+#defines the bathroom
 def bathroom():
     global enteredRooms
     global playerItems
@@ -101,7 +104,8 @@ def bathroom():
             userAction = raw_input('Not a valid action.  Try Again! ')
     if userAction == 'go south':
     	startingRoom()
-        
+	
+#defines hallway	
 def hallway():
 	exitRoom = False
 	print('You enter the hallway. Behind you to the west is the starting room. To your south you find the stairs that lead down to a foyer.')
@@ -119,7 +123,7 @@ def hallway():
 		foyer()
 	else:
 		startingRoom()
-
+#defines foyer
 def foyer():
 	exitRoom = False
 	print('You find yourself in the foyer of the home. To your south is the front door, to your west is the kitchen, and to your east is the living room. The upstairs hallay is to your north.')
@@ -147,7 +151,7 @@ def foyer():
 	        frontDoor()
 	else:
 		hallway()
-		
+#definds kitchen	
 def kitchen():
 	exitRoom = False
 	global playerItems
@@ -173,7 +177,8 @@ def kitchen():
 		pantry()
 	else:
 		foyer()
-		
+
+#defines the pantry
 def pantry():
 	global playerItems
 	exitRoom = False
@@ -197,7 +202,8 @@ def pantry():
 		else:
 			userAction = raw_input('Not a valid action. Try again! ')
 	kitchen()
-		
+
+#defines the living room which has the gun
 def livingRoom():
 	global playerItems
 	exitRoom = False
@@ -221,7 +227,8 @@ def livingRoom():
 		else:
 			userAction = raw_input('Not a valid action. Try again! ')
 	foyer()
-	
+
+#defines the front door which can lead to safety
 def frontDoor():
     global playerItems
     print('You try to open the front door. It will not open')
@@ -237,6 +244,7 @@ def frontDoor():
         print('You return to the foyer')
         foyer()
 
+#the function to win the game or possibly lose
 def breakDoor():
 	exitRoom = False
 	print('You break open the door with a loud crash of the hammer. As you are about to exit, you here a noise from the south. You are faced with a decision, run free to the north, or investigate the noise to the south.')
@@ -252,7 +260,8 @@ def breakDoor():
 		else:
 			userAction = raw_input('Not a valid action. Try again: ')
 	fight()
-		
+
+#the fight with the killer
 def fight():
 	global playerItems
 	print('You turn around to come face to face with your kidnapper. He rushes you with a shank.')
@@ -269,6 +278,7 @@ def fight():
 		print('You prepare yourself to fight, but you have no weapon to defend youself with. He quickly overpowers you and fatally stabs you.')
 		die()
 
+#runs when you win the game
 def win():
 	print('congradulations! You escaped and earned your freedom!')
 	print('End of game')
@@ -281,7 +291,7 @@ def win():
 	else:
 		print("please enter yes or no")
 		
-	
+#runs when you lose the game	
 def die():
 	print('Sorry. You died? Mad?')
 	again = raw_input('Would you like to play again? (yes or no) ')
@@ -291,7 +301,7 @@ def die():
 		print("Thanks for playing!")
 	else:
 		print("please enter yes or no")
-		
+#resets the game		
 def reset():
 	global playerItems
 	global openedDoors
